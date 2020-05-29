@@ -15,5 +15,14 @@ app.use(require('./routes/streamzoom.routes'));
 
 app.use(express.static(__dirname + "/public"));
 
+// Evetnt type connection which opens a socket is going to execute a function
+io.on('connection', (socket) => {
+    // We add an event to the socket type stream 
+    socket.io('stream', (image) => {
+        // We emit the streamm to every socket conected
+        socket.broadcast.emit('stream', image);
+    })
+});
+
 
 module.exports = http;
