@@ -1,0 +1,34 @@
+{
+  "name": "streaming",
+  "version": "0.0.1",
+  "description": "Aplication made on NODEjs and socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garavirod/VideoStreaming.git"
+  },
+  "keywords": [
+    "Express",
+    "Socket.io",
+    "Animation",
+    "Canvas",
+    "Nodejs",
+    "Window.URL"
+  ],
+  "author": "Rodrigo Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Garavirod/VideoStreaming/issues"
+  },
+  "homepage": "https://github.com/Garavirod/VideoStreaming#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
