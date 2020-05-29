@@ -8,9 +8,12 @@ const io = require('socket.io')(http);
 
 // Routes
 
-app.use('./routes/streamzoom.routes');
+app.use(require('./routes/streamzoom.routes'));
 
 
-// HTML
+// To serving HTML
 
-app.use(express.static(__dirname + "/publuc"));
+app.use(express.static(__dirname + "/public"));
+
+
+module.exports = http;
