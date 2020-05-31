@@ -27,13 +27,14 @@
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="#" class="btn btn-primary" id="emit">EMIT</a>
+                <button class="btn btn-primary" id="emit">EMIT</button>
             </div>
         </div>
     </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="socket.io/socket.io.js" charset="utf-8"></script>
     <script>
         var canvas = document.querySelector('#preview');
         var context = canvas.getContext('2d');
@@ -45,7 +46,7 @@
         context.height = canvas.height;
 
         var video = document.querySelector('#video');
-        var sicket = io();
+        var socket = io();
 
 
         function putMessage(msg) {
@@ -64,8 +65,31 @@
 
         function watchVideo(video, context) {
             context.drawImage(video, 0, 0, context.width, context.height);
-            socket.emit('stream');
+            //This allows to catch in other HTML
+            socket.emit('stream', canvas.toDataURL('image/webp'));
         }
+
+        btn.addEventListener('click', () => {
+            //We ask, which browser the user has to acces the media devices
+            navigator.getUserMedia =
+                (
+                    navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msg.getUserMedia
+
+                )
+            if (navigator.getUserMedia) {
+                //We ask for permisson for taking over the camera
+                navigator.getUserMedia({
+                    video: true
+                }, loadCamera, errorCamera);
+            }
+
+            var inter = setInterval(() => {
+                watchVideo(video, context);
+            }, 500)
+        });
     </script>
 </body>
 
