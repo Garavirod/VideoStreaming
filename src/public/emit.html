@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+
+    </style>
     <title>Document</title>
 </head>
 
@@ -13,21 +16,23 @@
     <hr>
     <br>
     <div class="container">
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="row rounded m-5 p-5 justify-content-center">
-                    <div class="col-md-8 bg-dark" style="height: 300px;">
-                        <video src="" id="video" autoplay="true"></video>
-                        <canvas id="preview"></canvas>
-                        <div class="alert alert-danger" id="status" role="alert">
-                            A simple danger alert—check it out!
+        <div class="card mb-3" style="max-width: 600px;">
+            <div class="row no-gutters">
+                <div class="col-md-8 bg-success">
+                    <div class="row bg-warning justify-content-center p-2">
+                        <div class="col-md-12 bg-dark">
+                            <video src="" id="video" autoplay="true"></video>
+                            <canvas id="preview" class="bg-info"></canvas>
                         </div>
                     </div>
                 </div>
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <button class="btn btn-primary" id="emit">EMIT</button>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Emitir</h5>
+                        <p class="card-text">To emit on direct press 'Emit'</p>
+                        <button class="btn btn-primary" id="emit">Emit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -39,8 +44,8 @@
         var canvas = document.querySelector('#preview');
         var context = canvas.getContext('2d');
         var btn = document.querySelector('#emit');
-        canvas.width = 512;
-        canvas.height = 384;
+        canvas.width = 100;
+        canvas.height = 100;
 
         context.width = canvas.width;
         context.height = canvas.height;
@@ -88,7 +93,7 @@
 
             var inter = setInterval(() => {
                 watchVideo(video, context);
-            }, 500)
+            }, 30)
         });
     </script>
 </body>
